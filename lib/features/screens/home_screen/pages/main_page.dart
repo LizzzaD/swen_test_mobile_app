@@ -55,7 +55,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
         final double oneThirdHeight;
         if (_topHeight != null) {
           final availableHeight = constraints.maxHeight - _topHeight! - 4 - 16;
-          oneThirdHeight = availableHeight / 3;
+          oneThirdHeight = availableHeight / 3 - 4;
         } else {
           oneThirdHeight = -1;
         }
@@ -288,7 +288,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                   )
                 : const SizedBox(),
             const SizedBox(height: 16),
-            const Placeholder(),
+            _topHeight != null ? const Placeholder() : const SizedBox(),
           ],
         );
       },
