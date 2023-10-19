@@ -35,6 +35,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
       duration: const Duration(milliseconds: 600),
       vsync: this,
     );
+    _controller.addListener(() => setState(() {}));
 
     _offsetAnimation = Tween<double>(begin: -200, end: 0).animate(_controller);
     _buttonAnimation = Tween<double>(begin: 200, end: 0).animate(_controller);
