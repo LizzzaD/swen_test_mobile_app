@@ -35,18 +35,18 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
       duration: const Duration(milliseconds: 600),
       vsync: this,
     );
-    _controller.addListener(() => setState(() {}));
 
     _offsetAnimation = Tween<double>(begin: -200, end: 0).animate(_controller);
     _buttonAnimation = Tween<double>(begin: 200, end: 0).animate(_controller);
     _titleAnimation = Tween<double>(begin: -200, end: 0).animate(_controller);
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      final renderBox = _topKey.currentContext!.findRenderObject()! as RenderBox?;
-      _topHeight = renderBox!.size.height;
-      setState(() {});
+      _setupHeight();
+
       _startAnimation();
     });
+
+    _controller.addListener(_setupHeight);
   }
 
   @override
@@ -54,6 +54,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
     return LayoutBuilder(
       builder: (context, constraints) {
         final double oneThirdHeight;
+
         if (_topHeight != null) {
           final availableHeight = constraints.maxHeight - _topHeight! - 4 - 16;
           oneThirdHeight = availableHeight / 3 - 4;
@@ -289,7 +290,13 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
                   )
                 : const SizedBox(),
             const SizedBox(height: 16),
-            _topHeight != null ? const Placeholder() : const SizedBox(),
+            _topHeight != null
+                ? const SizedBox(
+                    width: double.infinity,
+                    height: 300,
+                    child: Placeholder(),
+                  )
+                : const SizedBox(),
           ],
         );
       },
@@ -299,6 +306,13 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
   void _startAnimation() {
     _controller.reset();
     _controller.forward();
+  }
+
+  void _setupHeight() {
+    final renderBox = _topKey.currentContext!.findRenderObject()! as RenderBox?;
+    _topHeight = renderBox!.size.height;
+
+    setState(() {});
   }
 
   @override
