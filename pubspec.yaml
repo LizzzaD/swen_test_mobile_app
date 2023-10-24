@@ -16,6 +16,7 @@ dependencies:
   flutter_svg: ^2.0.7
   cupertino_icons: ^1.0.6
   modal_bottom_sheet: ^3.0.0-pre
+  auto_size_text: ^3.0.0
 
 dev_dependencies:
   flutter_test:

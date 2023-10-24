@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/extension/build_context_extension.dart';
@@ -62,9 +63,10 @@ class _CategoryScreenState extends State<CategoryScreen> {
                         ),
                         Expanded(
                           flex: 3,
-                          child: Text(
+                          child: AutoSizeText(
                             widget.name,
                             style: context.styles.regular36.copyWith(color: context.colors.black),
+                            maxLines: 1,
                           ),
                         ),
                         Flexible(
@@ -106,9 +108,12 @@ class _CategoryScreenState extends State<CategoryScreen> {
                     Row(
                       children: [
                         Flexible(
-                          child: Text(
+                          child: AutoSizeText(
                             widget.totalNumber.toString(),
                             style: context.styles.regular72.copyWith(color: context.colors.black),
+                            minFontSize: 1,
+                            maxFontSize: 72,
+                            maxLines: 1,
                           ),
                         ),
                         const SizedBox(
@@ -123,7 +128,6 @@ class _CategoryScreenState extends State<CategoryScreen> {
                             ),
                           ),
                         ),
-                        const Spacer(),
                       ],
                     ),
                     Row(
